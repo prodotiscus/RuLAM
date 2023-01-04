@@ -1,0 +1,76 @@
+import pytest
+import requests
+
+import sys
+import os
+# TODO: makes test suite able to import submodules, but the solution looks lame
+sys.path.append(os.path.abspath(".."))
+sys.path.append(os.path.abspath("../.."))
+
+from dyn_fcfg import web_udpipe_processor
+
+
+def test_request_udpipe_processing(mocker):
+    mocker.patch("requests.post", side_effect=requests.exceptions.ConnectionError)
+    with pytest.raises(web_udpipe_processor.WebUDPipeProcessorError) as proc_err:
+        web_udpipe_processor.web_udpipe_process_text_conllu("Я иду в лес.")
+
+
+@pytest.mark.parametrize(
+    "input_text, output",
+    [
+        (
+            "Я иду домой.", [
+            {
+                "ID": 1,
+                "FORM": "Я",
+                "LEMMA": "я",
+                "UPOSTAG": "PRON",
+                "XPOSTAG": "_",
+                "FEATS": "Case=Nom|Number=Sing|Person=1",
+                "HEAD": 2,
+                "DEPREL": "nsubj",
+                "DEPS": "_",
+                "MISC": "_"
+            },
+            {
+                "ID": 2,
+                "FORM": "иду",
+                "LEMMA": "идти",
+                "UPOSTAG": "VERB",
+                "XPOSTAG": "_",
+                "FEATS": "Aspect=Imp|Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin|Voice=Act",
+                "HEAD": 0,
+                "DEPREL": "root",
+                "DEPS": "_",
+                "MISC": "_"
+            },
+            {
+                "ID": 3,
+                "FORM": "домой",
+                "LEMMA": "домой",
+                "UPOSTAG": "ADV",
+                "XPOSTAG": "_",
+                "FEATS": "Degree=Pos",
+                "HEAD": 2,
+                "DEPREL": "advmod",
+                "DEPS": "_",
+                "MISC": "SpaceAfter=No"
+            },
+            {
+                "ID": 4,
+                "FORM": ".",
+                "LEMMA": ".",
+                "UPOSTAG": "PUNCT",
+                "XPOSTAG": "_",
+                "FEATS": "_",
+                "HEAD": 2,
+                "DEPREL": "punct",
+                "DEPS": "_",
+                "MISC": "SpaceAfter=No"
+            }
+        ])
+    ])
+def test_parse_text(input_text, output):
+    result = web_udpipe_processor.parse_text(input_text)
+    assert result == output
