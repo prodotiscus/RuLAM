@@ -20,7 +20,7 @@ def test_request_udpipe_processing(mocker):
     "input_text, output",
     [
         (
-            "Я иду домой.", [
+            "Я иду домой.", [[
             {
                 "ID": 1,
                 "FORM": "Я",
@@ -69,8 +69,93 @@ def test_request_udpipe_processing(mocker):
                 "DEPS": "_",
                 "MISC": "SpaceAfter=No"
             }
-        ])
+        ]]),
+        ("Сначала один. Потом другой.", [
+        [
+            {
+                "ID": 1,
+                "FORM": "Сначала",
+                "LEMMA": "сначала",
+                "UPOSTAG": "ADV",
+                "XPOSTAG": "_",
+                "FEATS": "Degree=Pos",
+                "HEAD": 2,
+                "DEPREL": "advmod",
+                "DEPS": "_",
+                "MISC": "_"
+            },
+            {
+                "ID": 2,
+                "FORM": "один",
+                "LEMMA": "один",
+                "UPOSTAG": "DET",
+                "XPOSTAG": "_",
+                "FEATS": "Case=Nom|Gender=Masc|Number=Sing|PronType=Ind",
+                "HEAD": 0,
+                "DEPREL": "root",
+                "DEPS": "_",
+                "MISC": "SpaceAfter=No"
+            },
+            {
+                "ID": 3,
+                "FORM": ".",
+                "LEMMA": ".",
+                "UPOSTAG": "PUNCT",
+                "XPOSTAG": "_",
+                "FEATS": "_",
+                "HEAD": 2,
+                "DEPREL": "punct",
+                "DEPS": "_",
+                "MISC": "_"
+            }
+        ],
+        [
+            {
+                "ID": 1,
+                "FORM": "Потом",
+                "LEMMA": "потом",
+                "UPOSTAG": "ADV",
+                "XPOSTAG": "_",
+                "FEATS": "Degree=Pos",
+                "HEAD": 2,
+                "DEPREL": "advmod",
+                "DEPS": "_",
+                "MISC": "_"
+            },
+            {
+                "ID": 2,
+                "FORM": "другой",
+                "LEMMA": "другой",
+                "UPOSTAG": "ADJ",
+                "XPOSTAG": "_",
+                "FEATS": "Case=Nom|Degree=Pos|Gender=Masc|Number=Sing",
+                "HEAD": 0,
+                "DEPREL": "root",
+                "DEPS": "_",
+                "MISC": "SpaceAfter=No"
+            },
+            {
+                "ID": 3,
+                "FORM": ".",
+                "LEMMA": ".",
+                "UPOSTAG": "PUNCT",
+                "XPOSTAG": "_",
+                "FEATS": "_",
+                "HEAD": 2,
+                "DEPREL": "punct",
+                "DEPS": "_",
+                "MISC": "SpaceAfter=No"
+            }
+        ]
+    ])
     ])
 def test_parse_text(input_text, output):
     result = web_udpipe_processor.parse_text(input_text)
     assert result == output
+
+
+@pytest.mark.parametrize("value", ["", "  ", " \t "])
+def test_parse_text_with_empty_value(value):
+    with pytest.raises(web_udpipe_processor.WebUDPipeProcessorError) as proc_error:
+        web_udpipe_processor.parse_text(value)
+        assert str(proc_error) == "Empty value"

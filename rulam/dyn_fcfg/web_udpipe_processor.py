@@ -1,5 +1,6 @@
 import requests
 import typing as tp
+import re
 
 """
 Simple but slow web-interaction to UDPipe REST API
@@ -43,23 +44,25 @@ DictParsedConllu = tp.List[tp.Dict[str, str]]
 # TODO: list and dict comprehensions are unreadable
 def postprocess_conllu(conllu: str) -> DictParsedConllu:
     fields = "ID FORM LEMMA UPOSTAG XPOSTAG FEATS HEAD DEPREL DEPS MISC".split()
-    return [
-        {
+    sentences = [[]]
+    for line in conllu.splitlines():
+        if line == "":
+            sentences.append([])
+            continue
+        fields_of_line = line.split("\t")
+        sentences[-1].append({
             fields[e]: (
                 field_content if fields[e] not in ("ID", "HEAD") else int(field_content)
             )
-            for (e, field_content) in enumerate(line.split("\t"))
-        }
-        for line in conllu.splitlines()
-    ]
+            for (e, field_content) in enumerate(fields_of_line)
+        })
+    return sentences
 
 
 def parse_text(text: str) -> DictParsedConllu:
+    if re.search(r"^\s*$", text):
+        raise WebUDPipeProcessorError("Empty value")
+
     return postprocess_conllu(
         web_udpipe_process_text_conllu(text)
     )
-
-
-if __name__ == "__main__":
-    res = parse_text("Я пошёл домой.")
-    print(res)
