@@ -23,15 +23,23 @@ def request_udpipe_processing(text: str) -> tp.Dict[str, tp.Any]:
         "parser": 1,
         "data": text
     })
-    return req.json()
+    try:
+        result = req.json()
+    except requests.exceptions.JSONDecodeError:
+        raise WebUDPipeProcessorError("Server has produced non-JSON value.")
+    return result
 
 
 def web_udpipe_process_text_conllu(text: str) -> str:
     try:
         json_result = request_udpipe_processing(text)
     except requests.exceptions.ConnectionError:
-        raise WebUDPipeProcessorError
+        raise WebUDPipeProcessorError("Failed to establish connection to the server.")
+
+    if "result" not in json_result:
+        raise WebUDPipeProcessorError("Server has produced invalid JSON value.")
     text_with_comments = json_result["result"]
+
     return "\n".join(
         line for line in text_with_comments.splitlines() if not line.startswith("#")
     )
