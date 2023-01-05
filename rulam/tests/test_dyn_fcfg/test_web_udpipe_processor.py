@@ -10,10 +10,25 @@ sys.path.append(os.path.abspath("../.."))
 from dyn_fcfg import web_udpipe_processor
 
 
-def test_request_udpipe_processing(mocker):
+def test_request_udpipe_processing_connection_error(mocker):
     mocker.patch("requests.post", side_effect=requests.exceptions.ConnectionError)
     with pytest.raises(web_udpipe_processor.WebUDPipeProcessorError) as proc_err:
         web_udpipe_processor.web_udpipe_process_text_conllu("Я иду в лес.")
+        assert str(proc_err) == "Failed to establish connection to the server."
+
+
+def test_request_udpipe_processing_non_json_value(mocker):
+    mocker.patch("requests.Response.json", side_effect=requests.exceptions.JSONDecodeError("a", "b", 1))
+    with pytest.raises(web_udpipe_processor.WebUDPipeProcessorError) as proc_err:
+        web_udpipe_processor.web_udpipe_process_text_conllu("Я иду в лес.")
+        assert str(proc_err) == "Server has produced non-JSON value."
+
+
+def test_request_udpipe_processing_invalid_json_value(mocker):
+    mocker.patch("requests.Response.json", return_value={"error": "something"})
+    with pytest.raises(web_udpipe_processor.WebUDPipeProcessorError) as proc_err:
+        web_udpipe_processor.web_udpipe_process_text_conllu("Я иду в лес.")
+        assert str(proc_err) == "Server has produced invalid JSON value."
 
 
 @pytest.mark.parametrize(
@@ -148,7 +163,7 @@ def test_request_udpipe_processing(mocker):
             }
         ]
     ])
-    ])
+])
 def test_parse_text(input_text, output):
     result = web_udpipe_processor.parse_text(input_text)
     assert result == output
