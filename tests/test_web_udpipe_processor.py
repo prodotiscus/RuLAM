@@ -7,7 +7,7 @@ import os
 sys.path.append(os.path.abspath(".."))
 sys.path.append(os.path.abspath("../.."))
 
-from dyn_fcfg import web_udpipe_processor
+from rulam import web_udpipe_processor
 
 
 def test_request_udpipe_processing_connection_error(mocker):
@@ -29,6 +29,11 @@ def test_request_udpipe_processing_invalid_json_value(mocker):
     with pytest.raises(web_udpipe_processor.WebUDPipeProcessorError) as proc_err:
         web_udpipe_processor.web_udpipe_process_text_conllu("Я иду в лес.")
         assert str(proc_err) == "Server has produced invalid JSON value."
+
+
+def test_web_udpipe_process_text_conllu():
+    result = web_udpipe_processor.web_udpipe_process_text_conllu("Я иду в лес.")
+    print(result)
 
 
 @pytest.mark.parametrize(

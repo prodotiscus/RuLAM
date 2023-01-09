@@ -1,1 +1,0 @@
-from . import web_udpipe_processor
