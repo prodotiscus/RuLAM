@@ -40,3 +40,16 @@ This will produce a ready-made DRS for you and, as you can see, the anaphora bet
 ```
 d0: ['s0-r0', 's1-r0'] : ([z1,z2],[zajats(z1), MALE(z1), bezhat(z1), (z2 = z1), seryj(z2), MALE(z2)])
 ```
+
+## How the project works
+The RuLAM project is designed as a pipeline.
+* Syntax & morphology parsing stage: First, RuLAM sends the text to the morphological and syntactic parser UDPipe.
+* Symbolization stage: Then, receiving data in the CoNLL-U format, looking at the data about the syntax of the text and the morphology of words, RuLAM based on the rules generates predicates.
+* Tree to lambda conversion stage: Using the principles of Glue Semantics, RuLam converts syntax trees to DRS.
+* DRS concatenation stage: NLTK provides an excellent set of tools for dealing with DRS, and with their help, RuLAM concatenates DRS structures and resolves anaphoras.
+
+## Current state
+1. At the moment, very few rules for conversion have been written, so not all sentences can be successfully parsed
+2. Only part of the code is covered by tests, and in some places there is already something to fix
+3. Processing of morphology is only at the initial stage, e.g., work on achieving the support of quantifiers has not yet begun
+4. UDPipe now connects through the web interface, which makes parsing slower, it would be cool to connect it locally
