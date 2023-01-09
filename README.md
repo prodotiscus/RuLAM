@@ -52,4 +52,7 @@ The RuLAM project is designed as a pipeline.
 1. At the moment, very few rules for conversion have been written, so not all sentences can be successfully parsed
 2. Only part of the code is covered by tests, and in some places there is already something to fix
 3. Processing of morphology is only at the initial stage, e.g., work on achieving the support of quantifiers has not yet begun
-4. UDPipe now connects through the web interface, which makes parsing slower, it would be cool to connect it locally
+4. The symbolizer needs to be taught to translate the names of predicates into English, not transliterated Russian
+5. UDPipe now connects through the web interface, which makes parsing slower, it would be cool to connect it locally
+
+And other things to do...
