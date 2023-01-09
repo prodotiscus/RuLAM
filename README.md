@@ -58,5 +58,6 @@ The RuLAM project is designed as a pipeline.
 3. Processing of morphology is only at the initial stage, e.g., work on achieving the support of quantifiers has not yet begun
 4. The symbolizer needs to be taught to translate the names of predicates into English, not transliterated Russian
 5. UDPipe now connects through the web interface, which makes parsing slower, it would be cool to connect it locally
+6. Anaphora resolution should be precise
 
 And other things to do...
