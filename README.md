@@ -41,7 +41,8 @@ parser.readings(show_thread_readings=True, filter=True)
 ```
 This will produce a ready-made DRS for you and, as you can see, the anaphora between the pronoun `он` and the previously mentioned noun `заяц` is resolved.
 ```
-d0: ['s0-r0', 's1-r0'] : ([z1,z2],[zajats(z1), MALE(z1), bezhat(z1), (z2 = z1), seryj(z2), MALE(z2)])
+d0: ['s0-r0', 's1-r0'] :
+([z1,z2],[zajats(z1), MALE(z1), bezhat(z1), (z2 = z1), seryj(z2), MALE(z2)])
 ```
 
 ## How the project works
