@@ -1,4 +1,6 @@
 # RuLAM: <ins>Ru</ins>ssian Natural Language to <ins>Lam</ins>bda Expressions
+![coverage](https://img.shields.io/badge/coverage-27%25-yellowgreen)
+
 The main goal of the **RuLam** project is to build a universal parser capable of converting arbitrary Russian text into lambda calculus expressions and, as result, creating DRS from the given text.
 
 Discourse representation structures (DRS) are used in DRT (Discourse representation theory) to represent a hearer's mental representation of a discourse as it unfolds over time. A very important advantage of modelling text with the DRT is the ability to resolve anaphora within a sentence and solve various problems involving coreference within a text. This means that we, for example, can determine exactly which pronouns correspond to the previously mentioned objects and subjects, and which do not.
