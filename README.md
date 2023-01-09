@@ -22,6 +22,7 @@ pip3 install -r requirements.txt
 It's best to first make sure that nothing is broken and everything works:
 
 ```
+python3 -m pytest --cov-report term:skip-covered --cov=rulam tests/
 python3 -m pytest
 ```
 
