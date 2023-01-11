@@ -59,5 +59,6 @@ The RuLAM project is designed as a pipeline.
 4. The symbolizer needs to be taught to translate the names of predicates into English, not transliterated Russian
 5. UDPipe now connects through the web interface, which makes parsing slower, it would be cool to connect it locally
 6. Anaphora resolution should be precise
+7. Integrate with [sfedia/nltk-drt](https://github.com/sfedia/nltk-drt) to support tense and presupposition resolution in Russian
 
 And other things to do...
