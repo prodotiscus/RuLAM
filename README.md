@@ -48,7 +48,7 @@ d0: ['s0-r0', 's1-r0'] :
 The RuLAM project is designed as a pipeline.
 * Syntax & morphology parsing stage: First, RuLAM sends the text to the morphological and syntactic parser UDPipe.
 * Symbolization stage: Then, receiving data in the CoNLL-U format, looking at the data about the syntax of the text and the morphology of words, RuLAM based on the rules generates predicates.
-* Tree to lambda conversion stage: Using the principles of Glue Semantics, RuLam converts syntax trees to DRS.
+* Tree to lambda conversion stage: Using the principles of [Glue Semantics](https://en.wikipedia.org/wiki/Glue_semantics), RuLam converts syntax trees to DRS.
 * DRS concatenation stage: NLTK provides an excellent set of tools for dealing with DRS, and with their help, RuLAM concatenates DRS structures and resolves anaphoras.
 
 ## Current state and future challenges
