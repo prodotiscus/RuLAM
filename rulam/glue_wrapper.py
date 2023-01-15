@@ -684,7 +684,7 @@ def resolve_anaphora(expression, trail=[]):
 
 
 
-class RulLamGlueReadingCommand(nltk.inference.discourse.ReadingCommand):
+class RuLamGlueReadingCommand(nltk.inference.discourse.ReadingCommand):
     def __init__(self, semtype_file=None, remove_duplicates=False, depparser=None):
         """
         :param semtype_file: name of file where grammar can be loaded
