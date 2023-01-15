@@ -1,4 +1,4 @@
-NOUN :  (\Q.(([x],[<word>(x), <feat.Gender.symb>(x)])+Q(x)), ((f -o Var) -o Var)) : []
+NOUN :  (\Q.(([x],[<word>(x), <word::Gender>(x)])+Q(x)), ((f -o Var) -o Var)) : []
 PRON : (\P Q.(([x],[]) + P(x) + Q(x)), ((v -o r) -o ((f -o var) -o var))), (\x.([],[PRO(x)]), (v -o r))
 VERB : (\x.([],[<word>(x)]), (nsubj -o f)) : [nsubj]
-ADJ : (\x.([],[<word>(x), <feat.Gender.symb>(x)]), (nsubj -o f)) : [nsubj]
+ADJ : (\x.([],[<word>(x), <word::Gender>(x)]), (nsubj -o f)) : [nsubj]

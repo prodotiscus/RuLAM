@@ -293,7 +293,7 @@ class RuLamGlueDict(dict):
         node_symb = node_symbolizer.symb().replace(".", "")
         generic = generic.replace("<word>", node_symb)
         generic = re.sub(
-            r"<feat[.]([A-Z][a-z]+)[.]symb>",
+            r"<word::([A-Z][a-z]+)>",
             lambda m: node_symbolizer.symbolize_feature(m.group(1)),
             generic
         )
