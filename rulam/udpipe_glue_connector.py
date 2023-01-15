@@ -1,5 +1,5 @@
 import nltk
-from .glue_wrapper import RuLamGlueReadingCommand
+from .glue_reading import RuLamGlueReadingCommand
 
 
 def make_discourse_tester(sentences) -> nltk.DiscourseTester:
