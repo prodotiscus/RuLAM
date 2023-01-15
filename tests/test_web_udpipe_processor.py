@@ -33,7 +33,6 @@ def test_request_udpipe_processing_invalid_json_value(mocker):
 
 def test_web_udpipe_process_text_conllu():
     result = web_udpipe_processor.web_udpipe_process_text_conllu("Я иду в лес.")
-    print(result)
 
 
 @pytest.mark.parametrize(

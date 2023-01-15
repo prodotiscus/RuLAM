@@ -265,7 +265,7 @@ class RuLamGlueDict(dict):
         if rel in ["nmod", "vmod"]:
             return [node["ctag"], rel]
         else:
-            print(node["ctag"])
+            # TODO(sfedia): add if-branch for quantifiers (e.g., каждый) etc.
             return [node["ctag"]]
 
     def get_glueformulas_from_semtype_entry(
@@ -740,6 +740,5 @@ class RuLamDrtGlue(nltk.sem.glue.Glue):
         """
 
         web_result = web_udpipe_process_text_conllu(sentence)
-        print(web_result)
         depgraph = DependencyGraph(web_result)
         return [depgraph]
