@@ -52,7 +52,7 @@ The RuLAM project is designed as a pipeline.
 * Tree to lambda conversion stage: Using the principles of Glue Semantics, RuLam converts syntax trees to DRS.
 * DRS concatenation stage: NLTK provides an excellent set of tools for dealing with DRS, and with their help, RuLAM concatenates DRS structures and resolves anaphoras.
 
-## Current state
+## Current state and future challenges
 1. At the moment, very few rules for conversion have been written, so not all sentences can be successfully parsed
 2. Only part of the code is covered by tests, and in some places there is already something to fix
 3. Processing of morphology is only at the initial stage, e.g., work on achieving the support of quantifiers has not yet begun
