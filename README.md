@@ -7,8 +7,8 @@ Discourse representation structures (DRS)<sup>[[4]](https://plato.stanford.edu/e
 
 For the Russian language, as far as we know, there is no DRT parser yet. This project aims to realize this possibility.
 
-Useful papers and stuff on Zotero RuLAM Group: https://www.zotero.org/groups/4913575/rulam/
-Trello board: https://trello.com/w/rulam1
+* Useful papers and stuff on Zotero RuLAM Group: https://www.zotero.org/groups/4913575/rulam/
+* Trello board: https://trello.com/w/rulam1
 
 ## Installation
 While the project is still in its very first steps and has not been published to PyPI, so to install the project and play around, you can clone the repository:
